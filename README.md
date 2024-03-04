@@ -1,3 +1,3 @@
 # OpenVK Docs
 
-The official documentation of the OpenVK project.
+Офіційна документация проекту OpenVK
