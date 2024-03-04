@@ -10,14 +10,14 @@ theme:
       accent: blue
       toggle:
         icon: material/lightbulb
-        name: Switch to dark mode
+        name: Переключіться на темний режим
     - media: "(prefers-color-scheme: dark)" 
       scheme: slate
       primary: grey
       accent: blue
       toggle:
         icon: material/lightbulb-outline
-        name: Switch to light mode
+        name: Переключіться на світлий режим
   icon:
     repo: fontawesome/brands/github
   features:
@@ -27,32 +27,24 @@ repo_url: https://github.com/openvk/docs
 repo_name: openvk/docs
 
 nav:
-  - 'Main page': 'index.md'
+  - 'Головна сторінка': 'index.md'
   - Chandler:
     - 'chandler/about.md'
     - 'chandler/installing.md'
   - 'OpenVK Engine':
     - 'openvk_engine/about.md'
-    - 'ru':
+    - 'ukr':
       - 'API':
         - 'Объекты':
-          - 'Жанры аудиозаписей': 'openvk_engine/ru/api/objects/audio_genres.md'
-          - 'Аудиозапись': 'openvk_engine/ru/api/objects/audio.md'
-          - 'Заметка': 'openvk_engine/ru/api/objects/note.md'
-          - 'Фотография': 'openvk_engine/ru/api/objects/photo.md'
-          - 'Плейлист': 'openvk_engine/ru/api/objects/playlist.md'
-          - 'Обсуждение': 'openvk_engine/ru/api/objects/topic.md'
-      - 'openvk_engine/ru/api/description.md'
-      - 'openvk_engine/ru/themepack_creation.md'
-    - 'en':
-      - 'API':
-        - 'Objects':
-          - 'Audio Genres': 'openvk_engine/en/api/objects/audio_genres.md'
-          - 'Audio': 'openvk_engine/en/api/objects/audio.md'
-          - 'Playlist': 'openvk_engine/en/api/objects/playlist.md'
-      - 'openvk_engine/en/api/description.md'
-      - 'openvk_engine/en/themepack_creation.md'
-    - 'Tutorials':
+          - 'Жанри аудіозаписів': 'openvk_engine/ukr/api/objects/audio_genres.md'
+          - 'Аудіозапис': 'openvk_engine/ukr/api/objects/audio.md'
+          - 'Нотатка': 'openvk_engine/ukr/api/objects/note.md'
+          - 'Світлина': 'openvk_engine/ukr/api/objects/photo.md'
+          - 'Плейлист': 'openvk_engine/ukr/api/objects/playlist.md'
+          - 'Обговорення': 'openvk_engine/ukr/api/objects/topic.md'
+      - 'openvk_engine/ukr/api/description.md'
+      - 'openvk_engine/ukr/themepack_creation.md'
+    - 'Туторіали':
       - 'openvk_engine/centos8_installation.md'
       - 'openvk_engine/ton_integration.md'
 
