@@ -52,7 +52,7 @@ ln -s /path/to/chandler/extensions/available/openvk /path/to/chandler/extensions
 * **Пароль**: `admin`
    * Рекомендується змінити пароль перед використанням вбудованого облікового запису.
 
-Повний приклад інсталяції для CentOS 8 також доступний [тут](/openvk_engine/centos8_installation/).
+Повний приклад інсталяції для CentOS 8 також доступний [тут](/openvk_engine/centos8_installation.md).
 
 ### Якщо мій веб-сайт використовує OpenVK, чи варто мені публікувати його вихідні коди?
 
