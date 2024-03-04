@@ -1,8 +1,8 @@
-# TON integration
+# Інтеграція TON
 
-If you have commerce turned on and you really want to sell "voices" for real money, there is a thing called "TON Integration".
+Якщо у вас увімкнено комерцію і ви справді хочете продавати «голоси» за реальні гроші, існує річ під назвою «Інтеграція TON».
 
-To configure this, firstly you should turn it on in `openvk.yml` config file:
+Щоб налаштувати це, спершу вам слід увімкнути його у конфігураційному файлі `openvk.yml`:
 
 ```yaml
 ton:
@@ -14,26 +14,26 @@ ton:
     hint: "ovk=$1"
 ```
 
-**Where:**
+**Де:**
 
-`address` is the your wallet address (you can make in on [TON Wallet](https://wallet.ton.org) website, mobile apps like Tonkeeper or Toncoin Wallet, available both on Android and iOS, or trough Telegram bots (not recommended))
+`address` — це адреса вашого гаманця (ви можете зробити це на веб-сайті [TON Wallet](https://wallet.ton.org), мобільних програмах, як-от Tonkeeper або Toncoin Wallet, доступних як на Android, так і на iOS, або через ботів Telegram (не рекомендовано))
 
-`rate` - the currency of voices per TON
+`rate` - валюта голосів за TON
 
-`regex` and `hint` - the way to identify a user by ID (it's better to leave it as default)
+`regex` і `hint` - спосіб ідентифікації користувача за ID (краще залишити за замовчуванням)
 
-**Next**, add a task to a crontab:
+**Далі** додайте завдання до crontab:
 
-```sh
-crontab -e
+```ш
+кронтаб -е
 ```
 
-And add this to the text editor that just opened up:
+І додайте це до текстового редактора, який щойно відкрився:
 
-```cron
+``` cron
 */1 * * * * php /path/where/is/your/openvk/installation/is/located/openvkctl fetch-ton
 ```
 
-This thing will check for new transactions every minute. 
+Ця штука щохвилини перевірятиме наявність нових транзакцій.
 
-**And you're actually done!** Enjoy your TONs!
+**І ви фактично закінчили!** Насолоджуйтесь своїми ТОНАМИ!
