@@ -1,48 +1,50 @@
-# Installing OpenVK on CentOS 8
+<!-- ермаков гей-->
 
-This is an example guide made specifically for CentOS 8 that is based on [@rem-pai](https://github.com/rem-pai)'s way to install OpenVK modified by WerySkok. 
+# Установка OpenVK на CentOS 8
 
-!!! caution
-    CentOS 8 is reaching it's end-of-life soon. There are other supported similar distributions like Rocky Linux or AlmaLinux.
+Це приклад посібника, розробленого спеціально для CentOS 8, який базується на способі [@rem-pai](https://github.com/rem-pai) для встановлення OpenVK, модифікованому WerySkok.
+
+!!! УВАГА
+    Термін експлуатації CentOS 8 скоро закінчиться. Існують інші підтримувані подібні дистрибутиви, наприклад Rocky Linux або AlmaLinux.
 
 ## SELinux
 
-🖥Run the command:
+🖥Виконайте команду:
 
 ```bash
 sestatus
 ```
 
-If it says `SELinux status:                 enabled` then SELinux will disturb us. Let's disable it.
+Якщо там зазначено `Status SELinux: enabled`, тоді SELinux заважатиме нам. Давайте відключимо його.
 
-!!! note
-    I know that it's not most secured solution but I don't know any proper way that will work._
+!!! ЗАУВАЖТЕ
+    я знаю, що це не найбезпечніше рішення, але я не знаю жодного правильного способу, який би спрацював._.
 
-📝Edit file `/etc/sysconfig/selinux` and change the line `SELinux=enforcing` to `SELinux=disabled`, then 🔌reboot your machine. `sestatus` should tell `SELinux status:                 disabled` right now.
+📝Відредагуйте файл `/etc/sysconfig/selinux` і змініть рядок `SELinux=enforcing` на `SELinux=disabled`, потім 🔌перезавантажте машину. `sestatus` має повідомляти про `Status SELinux: disabled`
 
-## Dependencies
+## Залежності
 
-🖥Let's install EPEL and Remi repos for PHP 7.4:
+🖥Давайте встановимо репозиторії EPEL і Remi для PHP 7.4:
 
 ```bash
 dnf -y install epel-release
 dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 ```
 
-🖥Then enable modules that we need:
+🖥Тоді ввімкнемо потрібні модулі:
 
 ```bash
 dnf -y module enable php:remi-7.4
 dnf -y module enable nodejs:14
 ```
 
-🖥And install dependencies:
+🖥І встановимо залежності:
 
 ```bash
 dnf -y install php php-cli php-common unzip php-zip php-yaml php-gd php-pdo_mysql nodejs git
 ```
 
-🖥Don't forget about Yarn and Composer:
+🖥Не забудьте про Yarn і Composer:
 
 ```bash
 npm i -g yarn
@@ -51,9 +53,9 @@ php composer-setup.php --filename=composer2 --install-dir=/bin --snapshot
 rm composer-setup.php
 ```
 
-### Database
+### База данніх
 
-🖥We will use Percona Server for DB:
+🖥Ми будемо використовувати Percona Server для БД:
 
 ```bash
 dnf -y install https://repo.percona.com/yum/percona-release-latest.noarch.rpm
@@ -62,17 +64,16 @@ dnf -y install percona-server-server percona-toolkit
 systemctl start mysql
 ```
 
-🖥And then look up for temporary password:
-
+🖥А потім знайдіте тимчасовий пароль:
 ```bash
 cat /var/log/mysqld.log | grep password
 ```
 
-It should look like this:
+Він довжен віглядати як:
 
     2021-01-11T12:56:09.203991Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: >b?Q.fDXJ4fk
 
-🖥Then run `mysql_secure_installation`, set new password and answer like this:
+🖥Потім запустіте mysql_secure_installation, установіте новий пароль і дайте відповідь так:
 
     Change the password for root ? ((Press y|Y for Yes, any other key for No) : n
     Remove anonymous users? (Press y|Y for Yes, any other key for No) : y
@@ -82,25 +83,25 @@ It should look like this:
 
 ### ffmpeg
 
-Additionally, you can install ffmpeg for processing videos.
+Крім того, ви можете встановити ffmpeg для обробки відео.
 
-🖥You will need to use RPMFusion repo to install it:
+🖥Вам знадобиться використовувати репозиторій RPMFusion, щоб його встановити:
 
 ```bash
 dnf -y localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
 dnf -y install --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
 ```
 
-🖥Then install SDL2 and ffmpeg:
+🖥Потім встановіте SDL2 і ffmpeg:
 
 ```bash
 dnf -y install http://rpmfind.net/linux/epel/7/x86_64/Packages/s/SDL2-2.0.10-1.el7.x86_64.rpm
 dnf -y install ffmpeg
 ```
 
-## Chandler and OpenVK installation
+## Встановлення Chandler та OpenVK
 
-🖥Install Chandler in `/opt`:
+🖥Встановіте Chandler в `/opt`:
 
 ```bash
 cd /opt
@@ -109,13 +110,13 @@ cd chandler/
 composer2 install
 ```
 
-🖥You will need a secret key. You can generate it using:
+🖥Вам знадобиться секретний ключ. Ви можете створити його за допомогою:
 
 ```bash
 cat /dev/random | tr -dc 'a-z0-9' | fold -w 128 | head -n 1
 ```
 
-📝Now edit config file `chandler-example.yml` like this:
+📝Тепер відредагуйте конфігураційний файл chandler-example.yml так:
 
 ```yaml title="/opt/chandler/chandler-example.yml" hl_lines="12-14 17"
 chandler:
@@ -139,13 +140,13 @@ chandler:
         sessionDuration: 14
 ```
 
-🖥And rename it to `chandler.yml`:
+🖥І перейменуйте його на `chandler.yml`:
 
 ```bash
 mv chandler-example.yml chandler.yml
 ```
 
-🖥Now let's install CommitCaptcha extension. It is mandatory for OpenVK.
+🖥Тепер давайте встановимо розширення CommitCaptcha. Він є обов'язковим для OpenVK.
 
 ```bash
 cd extensions/available/
@@ -154,7 +155,7 @@ cd commitcaptcha/
 composer2 install
 ```
 
-🖥And now download OpenVK:
+🖥А тепер завантажте OpenVK:
 
 ```bash
 cd ..
@@ -165,7 +166,7 @@ cd Web/static/js
 yarn install
 ```
 
-📝Now edit config file `openvk-example.yml` like this:
+📝Тепер відредагуйте конфігураційний файл openvk-example.yml так:
 
 ```yaml
 openvk:
@@ -227,33 +228,33 @@ openvk:
                 password: "DATABASE_PASSWORD"
 ```
 
-Please note `eventDB` section because it's better to enable event database.
+Зверніть увагу на розділ `eventDB`, оскільки краще ввімкнути базу даних подій.
 
-🖥And rename it to `openvk.yml`:
+🖥І перейменуйте його на `openvk.yml`:
 
 ```bash
 mv openvk-example.yml openvk.yml
 ```
 
-🖥Then enable CommitCaptcha and OpenVK for Chandler:
+🖥Потім увімкніте CommitCaptcha та OpenVK для Chandler:
 
 ```bash
 ln -s /opt/chandler/extensions/available/commitcaptcha/ /opt/chandler/extensions/enabled/commitcaptcha
 ln -s /opt/chandler/extensions/available/openvk/ /opt/chandler/extensions/enabled/openvk
 ```
 
-### DB configuration
+### Конфігурація БД
 
-!!! note
-    It's better to create another user for SQL but I won't cover that.
+!!! Зауважте
+     Краще створити іншого користувача для SQL, але я не буду розповідати про це.
 
-🖥Enter MySQL shell:
+🖥Введіть оболонку MySQL:
 
 ```bash
 mysql -p
 ```
 
-🖥And create main and event databases:
+🖥І створити бази даних основних і подій:
 
 ```sql
 CREATE DATABASE openvk;                                                                                          
@@ -261,55 +262,55 @@ CREATE DATABASE openvk_eventdb;
 exit
 ```
 
-🖥Go to `/opt/chandler`:
+🖥Перейдіте до `/opt/chandler`:
 
 ```bash
 cd /opt/chandler
 ```
 
-📝We need to import Chandler database but for some reason it's not ready for use so we need to edit dump `install/init-db.sql`:
-1\. Remove ` PAGE_CHECKSUM=1` everywhere.
-2\. Replace `Aria` with `InnoDB` everywhere.
+📝Нам потрібно імпортувати базу даних Chandler, але з якоїсь причини вона не готова до використання, тому нам потрібно відредагувати дамп `install/init-db.sql`:
+1\. Видаліть ` PAGE_CHECKSUM=1` всюди.
+2\. Скрізь замініть `Aria` на `InnoDB`.
 
-🖥Now database dump can be imported:
+🖥Тепер дамп бази даних можна імпортувати:
 
 ```bash
 mysql -p'DATABASE_PASSWORD' openvk < install/init-db.sql
 ```
 
-🖥Go to `extensions/available/openvk/`:
+🖥Перейдіть до `extensions/available/openvk/`:
 
 ```bash
 cd extensions/available/openvk/
 ```
 
-📝We also need to import OpenVK database. Unless you use MariaDB (we are using Percona here) you should edit `install/init-static-db.sql`:
-1\. Replace `utf8mb4_unicode_nopad_ci` with `utf8mb4_unicode_520_ci` everywhere.
+📝Нам також потрібно імпортувати базу даних OpenVK. Якщо ви не використовуєте MariaDB (тут ми використовуємо Percona), ви повинні редагувати `install/init-static-db.sql`:
+1\. Скрізь замініть `utf8mb4_unicode_nopad_ci` на `utf8mb4_unicode_520_ci`.
 
-🖥Now database dump can be imported:
+🖥Тепер дамп бази даних можна імпортувати:
 
 ```bash
 mysql -p'DATABASE_PASSWORD' openvk < install/init-static-db.sql
 ```
 
-🖥Also import event database:
+🖥Також імпортуйте БД подій:
 
 ```bash
 mysql -p'DATABASE_PASSWORD' openvk_eventdb < install/init-event-db.sql
 ```
 
-### Webserver configuration
+### Заванжатення веб-сервера:
 
-Apache is already installed so we will use it.
+Apache вже встановлено, тому ми будемо ним користуватися.
 
-🖥Make the user `apache` owner of the `chandler` folder:
+🖥Зробіть користувача `apache` власником папки `chandler`:
 
 ```bash
 cd /opt
 chown -R apache: chandler/
 ```
 
-📝Now let's create config file `/etc/httpd/conf.d/10-openvk.conf`:
+📝Тепер давайте створимо конфігураційний файл `/etc/httpd/conf.d/10-openvk.conf`:
 
 ```apache
 <VirtualHost *:80>
@@ -327,32 +328,32 @@ chown -R apache: chandler/
 </VirtualHost>
 ```
 
-📝Also enable rewrite_module by creating `/etc/httpd/conf.modules.d/02-rewrite.conf`:
+📝Також увімкніте rewrite_module, створивши `/etc/httpd/conf.modules.d/02-rewrite.conf`:
 
 ```apache
 LoadModule rewrite_module modules/mod_rewrite.so
 ```
 
-🖥Make directory for OpenVK logs and make the user `apache` owner of it:
+🖥Створіте каталог для журналів OpenVK і зробіте його власником користувача `apache`:
 
 ```bash
 mkdir /var/log/openvk
 chown apache: /var/log/openvk/
 ```
 
-🖥Make the firewall exception for port 80:
+🖥Зробіте виняток брандмауера для порту 80:
 
 ```bash
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --reload
 ```
 
-🖥And start Apache:
+🖥І запустіте Apache:
 
 ```bash
 systemctl start httpd
 ```
 
-OpenVK should work right now!
+OpenVK має працювати прямо зараз!
 
-Also you can raise 2MB the file limit through editing `/etc/php.ini`. And it's also better to install PHPMyAdmin but I won't cover that.
+Також ви можете збільшити ліміт файлу на 2 Мб, відредагувавши `/etc/php.ini`. Крім того, краще встановити PHPMyAdmin, але я не буду розповідати про це.
