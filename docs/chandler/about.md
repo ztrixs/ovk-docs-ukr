@@ -1,9 +1,9 @@
-# About Chandler
-[Chandler](https://github.com/openvk/chandler) is PHP-based web-framework/web-portal. By itself it's pretty useless, but you can install plugins/apps.
+# Про Chandler
+[Chandler](https://github.com/openvk/chandler) — це веб-фреймворк/веб-портал на основі PHP. Сам по собі це досить марно, але ви можете встановити плагіни/програми.
 
-## Plugins
-Plugins may provide a Web Application or be a library or hook.
-Web Apps are mounted to a path like this: `/<id>` (where `id = app id`), but one app can be mounted to root.
+## Плагіни
+Плагіни можуть надавати веб-програму або бути бібліотекою чи гаком.
+Веб-програми підключаються до такого шляху: `/<id>` (де `id = ідентифікатор програми`), але одну програму можна підключити до root.
 
-## State of Chandler
-This product is still in development phase, we are currently writing documentation/tests and API is going to change.
+## Стан Chandler
+Цей продукт все ще знаходиться на стадії розробки, зараз ми пишемо документацію/тести, і API буде змінено.
